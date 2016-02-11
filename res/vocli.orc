@@ -1,4 +1,4 @@
-; VocSin synth engines
+; Vocli synth engines
 
 /* Audio settings */
 sr	   	 =		44100

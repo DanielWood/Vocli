@@ -29,7 +29,8 @@ int orc_init(CSOUND *csound, const char *filename)
   fclose(fh);
   if (n_read != orc_size)
     {
-      fprintf(stderr, "Invalid number of bytes read from orchestra '%s': %d -- (Expected: %d)\n", filename, n_read, orc_size);
+      fprintf(stderr, "Invalid number of bytes read from orchestra '%s': %d "
+                        "-- (Expected: %d)\n", filename, n_read, orc_size);
       return FAIL;
     }
 

@@ -10,16 +10,16 @@
 typedef struct VoiceCmd
 {
   const char *name;
-  int (*callback)(char*, VoiceDef*);
+  int (*callback)(char *, VoiceDef *);
 } VoiceCmd;
 
 // Command prototypes
-extern int cmd_print(char *input, VoiceDef *voice);
-extern int cmd_edit(char *input, VoiceDef *voice);
-extern int cmd_name(char *input, VoiceDef *voice);
-extern int cmd_save(char *input, VoiceDef *voice);
-extern int cmd_help(char *input, VoiceDef *voice);
-extern int cmd_quit(char *input, VoiceDef *voice);
+extern int ve_cmd_print(char *input, VoiceDef *voice);
+extern int ve_cmd_edit(char *input, VoiceDef *voice);
+extern int ve_cmd_name(char *input, VoiceDef *voice);
+extern int ve_cmd_save(char *input, VoiceDef *voice);
+extern int ve_cmd_help(char *input, VoiceDef *voice);
+extern int ve_cmd_quit(char *input, VoiceDef *voice);
 
 // TODO!
 // cmd_load -- load a voice from disk

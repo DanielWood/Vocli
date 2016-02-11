@@ -11,19 +11,19 @@
 
 // Command table
 const VoiceCmd VoiceCommands[] = {
-  {"print", &cmd_print},
-  {"edit", &cmd_edit},
-  {"name", &cmd_name},
-  {"save", &cmd_save},
-  {"help", &cmd_help},
-  {"quit", &cmd_quit}
+  {"print", &ve_cmd_print},
+  {"edit", &ve_cmd_edit},
+  {"name", &ve_cmd_name},
+  {"save", &ve_cmd_save},
+  {"help", &ve_cmd_help},
+  {"quit", &ve_cmd_quit}
 };
 
 // Command count
-const int num_voice_cmds = (sizeof(VoiceCommands) / sizeof(VoiceCommands[0]));
+const int num_voice_cmds = sizeof(VoiceCommands) / sizeof(VoiceCommands[0]);
 
 /* Phoneme print command */
-int cmd_print(char *input, VoiceDef *voice)
+int ve_cmd_print(char *input, VoiceDef *voice)
 {
   // Help text
   if (input == NULL)
@@ -65,7 +65,7 @@ int cmd_print(char *input, VoiceDef *voice)
 }
 
 /* Phoneme edit command */
-int cmd_edit(char *input, VoiceDef *voice)
+int ve_cmd_edit(char *input, VoiceDef *voice)
 {
   // Help text
   if (input == NULL)
@@ -151,7 +151,7 @@ int cmd_edit(char *input, VoiceDef *voice)
 }
 
 /* Voice rename command */
-int cmd_name(char *input, VoiceDef *voice)
+int ve_cmd_name(char *input, VoiceDef *voice)
 {
   // Help text
   if (input == NULL)
@@ -186,7 +186,7 @@ int cmd_name(char *input, VoiceDef *voice)
 }
 
 /* Voice save command */
-int cmd_save(char *input, VoiceDef *voice)
+int ve_cmd_save(char *input, VoiceDef *voice)
 {
   // Help text
   if (input == NULL)
@@ -222,7 +222,7 @@ int cmd_save(char *input, VoiceDef *voice)
 }
 
 /* Help command */
-int cmd_help(char *input, VoiceDef *voice)
+int ve_cmd_help(char *input, VoiceDef *voice)
 {
   // Meta-help text
   if (input == NULL)
@@ -243,12 +243,12 @@ int cmd_help(char *input, VoiceDef *voice)
 }
 
 /* Quit command */
-int cmd_quit(char *input, VoiceDef *voice)
+int ve_cmd_quit(char *input, VoiceDef *voice)
 {
   // Help text
   if (input == NULL)
     {
-      printf("quit\t\t--\tQuit the editor\n");
+      printf("quit\t\t--\tQuit the voice editor and return to Vocli\n");
       return FAIL;
     }
 

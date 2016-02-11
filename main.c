@@ -1,7 +1,7 @@
 /*****************************************
 * Vocli: Csound-based speech synthesizer
 * Written by Daniel Wood (2016)
-*****************************************/
+******************************************/
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -14,8 +14,10 @@
 #include "voice_types.h"
 #include "arpabet.h"
 #include "voice_edit.h"
+#include "voice_cmds.h"
 #include "cmu.h"
 #include "sound.h"
+#include "cmds.h"
 
 // Orchestra file path
 const char *orc_path = "res/vocli.orc";
@@ -27,11 +29,11 @@ int main (int argc, char *argv[])
     "----------------------------------\n"
     "---  Vocli Speech Synthesizer  ---\n"
     "----------------------------------\n"
-    "- Version: v%s%*c-\n"
+    "- Version: v%s%*c\n"
     "- Email: d.ryan.wood@gmail.com   -\n"
     "----------------------------------\n\n",
     vocli_version,
-    abs(21 - strlen(vocli_version)), ' ');
+    abs(22 - strlen(vocli_version)), '-');
 
     // Initialize resources
     printf("Initializing CMU dictionary...\n");
@@ -64,7 +66,7 @@ int main (int argc, char *argv[])
 
     // Interactive console
     char input[512];
-    printf("\nType '!' to exit\n\n");
+    printf("\nType '!help' for a list of commands.\n\n");
     while (1)
     {
         // Prompt string
@@ -73,11 +75,14 @@ int main (int argc, char *argv[])
         // Read text from input
         fgets(input, 512, stdin);
 
-        // Handle quit command
+        // Handle commands
         if (input[0] == '!')
         {
             putchar('\n');
             break;
+
+            // Skip any further input processing
+            continue;
         }
 
         // Reformat string to match the dictionary
@@ -119,7 +124,7 @@ int main (int argc, char *argv[])
 
             // Separate each word
             if ((word = strtok(NULL, " ")) != NULL)
-            printf(" - ");
+                printf(" - ");
         }
 
         putchar('\n');
