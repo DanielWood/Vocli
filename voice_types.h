@@ -14,18 +14,18 @@
 // A single formant
 typedef struct FmtDef
 {
-  uint32_t fqc;    // Center frequency
-  uint32_t bw;     // Bandwidth
-  int32_t dBoffs;  // Amplitude offset (dB)
+    uint32_t fqc;    // Center frequency
+    uint32_t bw;     // Bandwidth
+    int32_t dBoffs;  // Amplitude offset (dB)
 } FmtDef;
 
 // A phoneme definition
 typedef struct PhonDef
 {
-  uint8_t ID;                   // ARPAbet phoneme ID
-  FmtDef Formant[NUM_FORMANTS]; // Formant resonances
-  float duration;               // Default phoneme duration
-  const char *ARPAsym;          // Corresponding ARPAbet symbol -- is this useful?
+    uint8_t ID;                   // ARPAbet phoneme ID
+    FmtDef Formant[NUM_FORMANTS]; // Formant resonances
+    float duration;               // Default phoneme duration
+    const char *ARPAsym;          // Corresponding ARPAbet symbol -- is this useful?
 } PhonDef;
 
 // A voice definition
@@ -35,9 +35,9 @@ typedef struct PhonDef
 // There are singular phonemes and compound phonemes, perhaps they could be separate from eachother
 typedef struct VoiceDef
 {
-  PhonDef Phoneme[NUM_PHONEMES];    // One phoneme for each letter in the ARPAbet
-  char name[SPEAKER_MAX];           // Speaker's name
-  char filename[PATH_MAX];          // Filename
+    PhonDef Phoneme[NUM_PHONEMES];    // One phoneme for each letter in the ARPAbet
+    char name[SPEAKER_MAX];           // Speaker's name
+    char filename[PATH_MAX];          // Filename
 } VoiceDef;
 
 #endif//__VOICE_TYPES_H__

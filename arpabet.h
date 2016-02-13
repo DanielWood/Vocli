@@ -18,8 +18,8 @@
 // A letter of the ARPAbet
 typedef struct ARPAsym
 {
-  char name[4];
-  int type;
+    char name[4];
+    int type;
 } ARPAsym;
 
 // Phoneme types in string format

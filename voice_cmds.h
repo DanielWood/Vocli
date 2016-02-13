@@ -9,8 +9,8 @@
 // Voice command hash
 typedef struct VoiceCmd
 {
-  const char *name;
-  int (*callback)(char *, VoiceDef *);
+    const char *name;
+    int (*callback)(char *, VoiceDef *);
 } VoiceCmd;
 
 // Command prototypes

@@ -2,15 +2,15 @@
 
 // Phoneme types in string format
 const char *Phontype[] =
-  {
+{
     "Monopthong", "Dipthong", "Stop",
     "Fricative", "Affricate", "Liquid",
     "Nasal", "Semivowel", "Aspirate"
-  };
+};
 
 // Default phoneme duration (Sagan) -- May vary at different points in word.
 const float Phontime[] =
-  {
+{
     .3f,    // Vowels
     .16f,   // Stops
     .13f,   // Fricatives
@@ -19,17 +19,17 @@ const float Phontime[] =
     .1f,    // Nasals
     .07f,   // Semivowels
     .05f    // Aspirates
-  };
+};
 
 // TODO: Dipthong map
 const ARPAsym Dipthomap[] =
-  {
-    
-  };
+{
+
+};
 
 // The ARPAbet
 const ARPAsym ARPAbet[NUM_PHONEMES] =
-  {
+{
     // Monopthongs
     {"AA", 0},    {"AE", 0},    {"AH", 0},    {"AO", 0},    {"EH", 0},
     {"ER", 0},    {"IH", 0},    {"IY", 0},    {"UH", 0},    {"UW", 0},
@@ -59,5 +59,5 @@ const ARPAsym ARPAbet[NUM_PHONEMES] =
 
     // Aspirates
     {"HH", 8}
-  };
+};
 

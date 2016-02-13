@@ -11,19 +11,19 @@
 // TODO: Make CMUDefs into a linked list
 typedef struct CMUDef
 {
-  char word[CMU_WORD_MAX];       // Word
-  char phonIDs[CMU_WORD_MAX];    // Pronunciation
-  char stress[CMU_WORD_MAX];     // Vowel stress
-  int num_phonemes;           // Phoneme count
-  //CMUDef *next;
+    char word[CMU_WORD_MAX];       // Word
+    char phonIDs[CMU_WORD_MAX];    // Pronunciation
+    char stress[CMU_WORD_MAX];     // Vowel stress
+    int num_phonemes;           // Phoneme count
+    //CMUDef *next;
 } CMUDef;
 
 // The CMU dictionary
 typedef struct CMUDict
 {
-  CMUDef *def;    // Definition array (I dont like this name) -- Dict is nicer
-  int size;    // Dictionary size / word count
-  //int num_words; <-- Better!
+    CMUDef *def;    // Definition array (I dont like this name) -- Dict is nicer
+    int size;    // Dictionary size / word count
+    //int num_words; <-- Better!
 } CMUDict;
 
 /* -- Forward declarations -- */

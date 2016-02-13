@@ -6,7 +6,7 @@
 // Command table
 const Cmd Commands[] = {
     {"ve", &cmd_ve,     "ve [voice]\t--\tLaunch the voice editor"},
-    {"help", &cmd_help, "help\t--\tDisplay this help text\nhelp [command] --\tDisplay information on a specific command"},
+    {"help", &cmd_help, "help\t--\tDisplay this help text\nhelp [command]\t--\tShow help on a specific command"},
     {"quit", &cmd_quit, "quit\t--\tQuit Vocli"}
 };
 

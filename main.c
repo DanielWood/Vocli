@@ -1,7 +1,6 @@
-/*****************************************
-* Vocli: Csound-based speech synthesizer
-* Written by Daniel Wood (2016)
-******************************************/
+/******************************************
+ * Vocli: Csound-based speech synthesizer *
+ ******************************************/
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -26,14 +25,14 @@ int main (int argc, char *argv[])
 {
     // Program banner
     printf(
-    "----------------------------------\n"
-    "---  Vocli Speech Synthesizer  ---\n"
-    "----------------------------------\n"
-    "- Version: v%s%*c\n"
-    "- Email: d.ryan.wood@gmail.com   -\n"
-    "----------------------------------\n\n",
-    vocli_version,
-    abs(22 - strlen(vocli_version)), '-');
+            "----------------------------------\n"
+            "---  Vocli Speech Synthesizer  ---\n"
+            "----------------------------------\n"
+            "- Version: v%s%*c\n"
+            "- Email: d.ryan.wood@gmail.com   -\n"
+            "----------------------------------\n\n",
+            vocli_version,
+            abs(22 - strlen(vocli_version)), '-');
 
     // Initialize resources
     printf("Initializing CMU dictionary...\n");
@@ -45,9 +44,8 @@ int main (int argc, char *argv[])
     csoundSetOption(csound, "-odac");    // Real time output
     if (csound == NULL)
     {
-        fprintf(stderr, "FATAL: Unable to create Csound\n");
         cmu_destroy(&dictionary);
-        return FAIL;
+        die(FAIL, "Unable to create Csound");
     }
 
     printf("Initializing Vocli orchestra...\n");
