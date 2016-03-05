@@ -4,10 +4,11 @@
 #include "cmds.h"
 
 // Command table
+// Should at least remove command name from description
 const Cmd Commands[] = {
-    {"ve", &cmd_ve,     "ve [voice]\t--\tLaunch the voice editor"},
-    {"help", &cmd_help, "help\t--\tDisplay this help text\nhelp [command]\t--\tShow help on a specific command"},
-    {"quit", &cmd_quit, "quit\t--\tQuit Vocli"}
+    {"ve",      &cmd_ve,    "ve [voice]\t--\tLaunch the voice editor"},
+    {"help",    &cmd_help,  "help [command]\t--\tDisplay this help text or show info on a specific command"},
+    {"quit",    &cmd_quit,  "quit\t--\tQuit Vocli"}
 };
 
 // Command count

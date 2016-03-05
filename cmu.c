@@ -31,7 +31,7 @@ int cmu_init(const char *filename, CMUDict *dictionary)
     fseek(fh, 0, SEEK_SET);
 
     // Allocate definitions array
-    dictionary->def = malloc(lines * sizeof(CMUDef));
+    dictionary->def = malloc((lines + 1) * sizeof(CMUDef));
     dictionary->size = lines;
 
     // Read dictionary
@@ -51,7 +51,7 @@ int cmu_init(const char *filename, CMUDict *dictionary)
         if (word == NULL)
             continue;
         else
-            strncpy(dictionary->def[i++].word, word, CMU_WORD_MAX);
+            strncpy(dictionary->def[i].word, word, CMU_WORD_MAX);
 
         // Collect phonemes
         char *ARPAsym = strtok(NULL, " ");
@@ -88,7 +88,13 @@ int cmu_init(const char *filename, CMUDict *dictionary)
 
         // Record phoneme count
         dictionary->def[i].num_phonemes = j;
+
+        // Linked list stuff
+        dictionary->def[i].next = &dictionary->def[i + 1];
+        i++;
     }
+
+    dictionary->def[i].next = NULL;
 
     return SUCCESS;
 }
@@ -102,10 +108,11 @@ void cmu_destroy(CMUDict *dictionary)
 /* Look up a word */
 CMUDef *cmu_find_word(const char *word, const CMUDict *dictionary)
 {
-    for (int i = 0; i < dictionary->size; i++)
+    struct CMUDef *p;
+    for (p = dictionary->def; p->next != NULL; p = p->next)
     {
-        if (strcmp(word, dictionary->def[i].word) == 0)
-            return &dictionary->def[i];
+        if (strcmp(word, p->word) == 0)
+            return p;
     }
 
     return NULL;

@@ -47,3 +47,14 @@ int orc_init(CSOUND *csound, const char *filename)
 
     return SUCCESS;
 }
+
+int phon_score_event(CSOUND *csound, const ARPAsym *sym, int tied)
+{
+    float dur = Phontime[sym->type];
+    float atkdec = .01;
+    float port = dur / 10;
+    float mouth = sym->type >= PHON_STOP;
+    
+//start dur db	pitch	a/d	port	vibatk	vibhz	vibstr	mouth	fqc1	bw1	dBoffs1	fqc2	bw2	dBoffs2	fqc3	bw3	dBoffs3	special
+    return 0;
+}

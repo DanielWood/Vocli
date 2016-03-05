@@ -6,7 +6,7 @@
 #include "mystring.h"
 
 // Info
-const char *vocli_version = "0.33";
+const char *vocli_version = "0.4";
 const char *author_email = "d.ryan.wood@gmail.com";
 
 // Wrapper for va_vocli_log
@@ -38,13 +38,12 @@ void va_vocli_log(int level, const char *format, va_list args)
     if (!is_initialized)
     {
         fprintf(logfh,
-                "Vocli v%s debug log (%s)\n",
+                "Vocli %s debug log (%s)\n",
                 "-----------------------------------------------+\n\n",
                 vocli_version, strchomp(ctime(&t)));
         is_initialized = true;
     }
 
-    char prefix[12];
     switch (level)
     {
         case LL_ERR:

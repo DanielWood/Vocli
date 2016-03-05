@@ -28,11 +28,11 @@ int main (int argc, char *argv[])
             "----------------------------------\n"
             "---  Vocli Speech Synthesizer  ---\n"
             "----------------------------------\n"
-            "- Version: v%s%*c\n"
+            "- Version: %s%*c\n"
             "- Email: d.ryan.wood@gmail.com   -\n"
             "----------------------------------\n\n",
             vocli_version,
-            abs(22 - strlen(vocli_version)), '-');
+            abs(23 - strlen(vocli_version)), '-');
 
     // Initialize resources
     printf("Initializing CMU dictionary...\n");
@@ -79,7 +79,7 @@ int main (int argc, char *argv[])
             putchar('\n');
             break;
 
-            // Skip any further input processing
+            // Skip any further input processing (not reached atm)
             continue;
         }
 

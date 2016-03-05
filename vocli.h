@@ -8,9 +8,8 @@ extern const char *vocli_version;
 extern const char *author_email;
 
 // Return flags
-#define SUCCESS 0    // Routine completed successfully
-#define FAIL 1       // Routine failed to complete
-
+#define SUCCESS 0
+#define FAIL 1
 
 #ifndef __GNUC__
     #define __attribute__(x)
@@ -27,6 +26,7 @@ extern void vocli_log(int level, const char *format, ...)
 
 
 // Error handling
+// Really dont have much of a use for this one
 extern void die(int retval, const char *format, ...)
     __attribute__((noreturn, format(printf, 2, 3)));
 

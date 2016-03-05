@@ -3,21 +3,22 @@
 // Phoneme types in string format
 const char *Phontype[] =
 {
-    "Monopthong", "Dipthong", "Stop",
-    "Fricative", "Affricate", "Liquid",
-    "Nasal", "Semivowel", "Aspirate"
+    "Monopthong", "Dipthong", "Liquid",
+    "Nasal", "Semivowel", "Stop",
+    "Fricative", "Affricate",  "Aspirate"
 };
 
 // Default phoneme duration (Sagan) -- May vary at different points in word.
 const float Phontime[] =
 {
-    .3f,    // Vowels
-    .16f,   // Stops
-    .13f,   // Fricatives
-    .2f,    // Affricates
+    .3f,    // Monopthongs
+    .3f,    // Dipthongs
     .1f,    // Liquids
     .1f,    // Nasals
     .07f,   // Semivowels
+    .16f,   // Stops
+    .13f,   // Fricatives
+    .2f,    // Affricates
     .05f    // Aspirates
 };
 
@@ -37,6 +38,15 @@ const ARPAsym ARPAbet[NUM_PHONEMES] =
     // Dipthongs
     {"EY", 1},    {"AY", 1},    {"OW", 1},    {"AW", 1},    {"OY", 1},
 
+    // Liquids
+    {"L", 5},    {"R", 5},
+
+    // Nasals
+    {"M", 6},    {"N", 6},    {"NG", 6},
+
+    // Semivowels
+    {"W", 7},    {"Y", 7},
+
     // Stops
     {"B", 2},    {"D", 2},    {"G", 2},
     {"K", 2},    {"P", 2},    {"T", 2},
@@ -47,15 +57,6 @@ const ARPAsym ARPAbet[NUM_PHONEMES] =
 
     // Affricates
     {"CH", 4},    {"JH", 4},
-
-    // Liquids
-    {"L", 5},    {"R", 5},
-
-    // Nasals
-    {"M", 6},    {"N", 6},    {"NG", 6},
-
-    // Semivowels
-    {"W", 7},    {"Y", 7},
 
     // Aspirates
     {"HH", 8}

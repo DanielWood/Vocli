@@ -15,7 +15,7 @@ typedef struct CMUDef
     char phonIDs[CMU_WORD_MAX];    // Pronunciation
     char stress[CMU_WORD_MAX];     // Vowel stress
     int num_phonemes;           // Phoneme count
-    //CMUDef *next;
+    struct CMUDef *next;
 } CMUDef;
 
 // The CMU dictionary

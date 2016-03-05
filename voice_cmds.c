@@ -11,12 +11,12 @@
 
 // Command table
 const VoiceCmd VoiceCommands[] = {
-    {"print", &ve_cmd_print},
-    {"edit", &ve_cmd_edit},
-    {"name", &ve_cmd_name},
-    {"save", &ve_cmd_save},
-    {"help", &ve_cmd_help},
-    {"quit", &ve_cmd_quit}
+    {"print",   &ve_cmd_print},
+    {"edit",    &ve_cmd_edit},
+    {"name",    &ve_cmd_name},
+    {"save",    &ve_cmd_save},
+    {"help",    &ve_cmd_help},
+    {"quit",    &ve_cmd_quit}
 };
 
 // Command count
