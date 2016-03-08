@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <inttypes.h>
 
@@ -7,10 +8,10 @@
 #include "voice_edit.h"
 
 /* Initialize an empty voicedef */
-void new_voice(VoiceDef *voice, const char *name)
+void init_voice(VoiceDef *voice, char *const name)
 {
     // Set voice name
-    if (name[0] != '\0')
+    if (name != NULL && name[0] != '\0')
         strncpy(voice->name, name, strlen(name));
     else
     {
@@ -34,16 +35,18 @@ void new_voice(VoiceDef *voice, const char *name)
     }
 }
 
+/* TODO
+ * < rob``> what I did in a project, was having both `foo *loads(FILE *stream)` and `foo *load(const char 
+ *          *fmt, ...)`, the latter taking a format string and args that I pass to snprintf to construct the 
+ *          filename, opening that and calling loads()
+ */
 /* Read a voicedef from disk */
-int read_voice(const char *filename, VoiceDef *voice)
+int read_voice(char *const filename, VoiceDef *voice)
 {
     // Open target file
     FILE *fh = fopen(filename, "r");
     if (fh == NULL)
-    {
-        fprintf(stderr, "Unable to open file '%s' for reading\n");
-        return FAIL;
-    }
+        return error(FAIL, "Unable to open file '%s' for reading", filename);
 
     // Read file header
     uint8_t header[5] = "\0\0\0\0";
@@ -64,14 +67,13 @@ int read_voice(const char *filename, VoiceDef *voice)
     // TODO: Selectively read matching phonemes? (Allows version compatibility and smaller? filesize)
     if (phoncount != NUM_PHONEMES)
     {
-        fprintf(stderr, "Invalid phoneme count %" PRIu8 " (Expected: %d) in file '%s'\n", phoncount, NUM_PHONEMES, filename);
-        fprintf(stderr, "Version mismatch?\n");
         fclose(fh);
-        return FAIL;
+        return error(FAIL, "Invalid phoneme count %" PRIu8 " (Expected: %d) in file '%s'", 
+                phoncount, NUM_PHONEMES, filename);
     }
 
     // Clear target voicedef
-    new_voice(voice, "");
+    init_voice(voice, "");
 
     // Save filename to voicedef
     strncpy(voice->filename, filename, PATH_MAX);
@@ -142,9 +144,9 @@ int read_voice(const char *filename, VoiceDef *voice)
     fclose(fh);
 
     // Verify voicedef
-    if (vrfy_voice(voice) != SUCCESS)
+    if (verify_voice(voice) != SUCCESS)
     {
-        //new_voice(voice, "");
+        //init_voice(voice, "");
         fprintf(stderr, "Failed to verify VoiceDef after successful read!\n");
         fprintf(stderr, "This shouldn't happen!\n");
         fprintf(stderr, "Can you email me with a log of this screen? (d.ryan.wood@gmail.com)\n");
@@ -158,17 +160,17 @@ int read_voice(const char *filename, VoiceDef *voice)
 
     // In case the read fails
 read_fail:
-    new_voice(voice, "");
+    init_voice(voice, "");
     fprintf(stderr, "Error reading VoiceDef from file '%s'\n", voice->filename);
     fclose(fh);
     return FAIL;
 }
 
 /* Write a voicedef to disk */
-int write_voice(const char *filename, VoiceDef *voice)
+int write_voice(char *const filename, VoiceDef *const voice)
 {
     // Verify voicedef
-    if (vrfy_voice(voice) != SUCCESS)
+    if (verify_voice(voice) != SUCCESS)
     {
         fprintf(stderr, "Unable to verify VoiceDef before writing\n");
         return FAIL;
@@ -235,7 +237,7 @@ write_fail:
 }
 
 /* Verify a voicedef */
-int vrfy_voice(const VoiceDef *voice)
+int verify_voice(VoiceDef *const voice)
 {
     // Pointer checkpp
     if (!voice || !voice->name || !*voice->name)
@@ -282,7 +284,7 @@ void print_phoneme(const PhonDef phoneme)
 }
 
 /* Find phoneme ID with ARPAbet symbol */
-unsigned char get_phonID(const char *ARPAsym)
+unsigned char get_phoneme_ID(char *const ARPAsym)
 {
     for (int i = 0; i < NUM_PHONEMES; i++)
     {

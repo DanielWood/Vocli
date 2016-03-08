@@ -9,7 +9,7 @@
 #include <csound.h>
 
 #include "vocli.h"
-#include "mystring.h"
+#include "utils.h"
 #include "voice_types.h"
 #include "arpabet.h"
 #include "voice_edit.h"
@@ -17,9 +17,6 @@
 #include "cmu.h"
 #include "sound.h"
 #include "cmds.h"
-
-// Orchestra file path
-const char *orc_path = "res/vocli.orc";
 
 int main (int argc, char *argv[])
 {
@@ -31,13 +28,13 @@ int main (int argc, char *argv[])
             "- Version: %s%*c\n"
             "- Email: d.ryan.wood@gmail.com   -\n"
             "----------------------------------\n\n",
-            vocli_version,
-            abs(23 - strlen(vocli_version)), '-');
+            VOCLI_VERSION,
+            abs(23 - strlen(VOCLI_VERSION)), '-');
 
     // Initialize resources
     printf("Initializing CMU dictionary...\n");
     CMUDict dictionary;
-    cmu_init("res/cmudict-0.7b", &dictionary);
+    cmu_init(CMU_PATH, &dictionary);
 
     printf("Creating Csound instance...\n");
     CSOUND *csound = csoundCreate(NULL);
@@ -45,11 +42,11 @@ int main (int argc, char *argv[])
     if (csound == NULL)
     {
         cmu_destroy(&dictionary);
-        die(FAIL, "Unable to create Csound");
+        return error(FAIL, "Unable to create Csound");
     }
 
     printf("Initializing Vocli orchestra...\n");
-    int res = orc_init(csound, orc_path);
+    int res = orc_init(csound, ORC_PATH);
     if (res != SUCCESS)
     {
         fprintf(stderr, "FATAL: Unable to initialize Vocli orchestra\n");

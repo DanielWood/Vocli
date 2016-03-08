@@ -1,13 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <stdbool.h>
 #include <time.h>
 #include "vocli.h"
-#include "mystring.h"
-
-// Info
-const char *vocli_version = "0.4";
-const char *author_email = "d.ryan.wood@gmail.com";
+#include "utils.h"
 
 // Wrapper for va_vocli_log
 void vocli_log(int level, const char *format, ...)
@@ -26,7 +23,7 @@ void va_vocli_log(int level, const char *format, va_list args)
 #ifdef VOCLI_LOG_ENABLE
     time_t t = time(0);
     
-    static char logname[128] = "";
+    static char logname[128];
     if (!*logname)
         snprintf(logname, 128, "vocli_log_%d.log", time);
 
@@ -61,8 +58,8 @@ void va_vocli_log(int level, const char *format, va_list args)
 #endif
 }
 
-// Exit with an error
-void die(int retval, const char *format, ...)
+// Error handling
+int error(int retval, const char *format, ...)
 {
     va_list args;
     va_start(args, format);
@@ -71,11 +68,9 @@ void die(int retval, const char *format, ...)
     vfprintf(stderr, format, args);
     fputc('\n', stderr);
 
-#ifdef VOCLI_LOG_ENABLE
     va_vocli_log(retval, format, args);
-#endif
 
     va_end(args);
-    exit(retval);
+    return retval;
 }
 

@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-#include "mystring.h"
+#include "utils.h"
 #include "vocli.h"
 #include "voice_edit.h"
 #include "voice_cmds.h"
@@ -47,7 +47,7 @@ int ve_cmd_print(char *input, VoiceDef *voice)
     // Get ID from input string
     uint8_t phonID = 255;
     if (isalpha(IDstr[0]))
-        phonID = get_phonID(IDstr);
+        phonID = get_phoneme_ID(IDstr);
     else
         phonID = (uint8_t)strtol(IDstr, NULL, 10);
 
@@ -87,7 +87,7 @@ int ve_cmd_edit(char *input, VoiceDef *voice)
     // Determine if IDstr is ID or name
     uint8_t phonID;
     if (isalpha(IDstr[0]))
-        phonID = get_phonID(IDstr);
+        phonID = get_phoneme_ID(IDstr);
     else
         phonID = (uint8_t)strtol(IDstr, NULL, 10);
 

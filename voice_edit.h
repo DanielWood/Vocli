@@ -6,12 +6,12 @@
 
 #include "voice_types.h"
 
-extern void new_voice(VoiceDef *voice, const char *name); // Rename to init_voice
-extern int read_voice(const char *filename, VoiceDef *voice);
-extern int write_voice(const char *filename, VoiceDef *voice);
-extern int vrfy_voice(const VoiceDef *voice); // Rename to verify_voice
+extern void init_voice(VoiceDef *voice, char *const name);
+extern int read_voice(char *const filename, VoiceDef *voice);
+extern int write_voice(char *const filename, VoiceDef *const voice);
+extern int verify_voice(VoiceDef *const voice);
 
 extern void print_phoneme(const PhonDef phoneme);
-extern unsigned char get_phonID(const char *ARPAsym); // Rename to get_phoneme_ID
+extern unsigned char get_phoneme_ID(char *const ARPAsym);
 
 #endif//__VOICE_EDIT_H__

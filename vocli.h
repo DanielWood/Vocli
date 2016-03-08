@@ -1,11 +1,7 @@
 #ifndef __VOCLI_H__
 #define __VOCLI_H__
 
-#include <stdbool.h>
-
-// Make an info.h?
-extern const char *vocli_version;
-extern const char *author_email;
+#include "config.h"
 
 // Return flags
 #define SUCCESS 0
@@ -24,10 +20,8 @@ enum {  LL_MSG = 0,
 extern void vocli_log(int level, const char *format, ...)
     __attribute__((format(printf, 2, 3)));
 
-
 // Error handling
-// Really dont have much of a use for this one
-extern void die(int retval, const char *format, ...)
-    __attribute__((noreturn, format(printf, 2, 3)));
+extern int error(int retval, const char *format, ...)
+    __attribute__((format(printf, 2, 3)));
 
 #endif//__VOCLI_H__

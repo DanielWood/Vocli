@@ -8,6 +8,6 @@
 #include "arpabet.h"
 
 extern int orc_init(CSOUND *csound, const char *filename);
-extern int phon_score_event(CSOUND *csound, const ARPAsym *sym, int tie);
+extern int phoneme_score_event(CSOUND *csound, const ARPAsym *sym, int tie);
 
 #endif//VOCLI__SOUND_H__

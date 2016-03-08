@@ -48,7 +48,7 @@ int orc_init(CSOUND *csound, const char *filename)
     return SUCCESS;
 }
 
-int phon_score_event(CSOUND *csound, const ARPAsym *sym, int tied)
+int phoneme_score_event(CSOUND *csound, const ARPAsym *sym, int tied)
 {
     float dur = Phontime[sym->type];
     float atkdec = .01;

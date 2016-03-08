@@ -1,5 +1,7 @@
 #include <stdio.h>
+#include <string.h>
 #include "vocli.h"
+#include "voice_edit.h"
 #include "voice_cmds.h"
 #include "cmds.h"
 
@@ -24,8 +26,22 @@ int cmd_ve(char *input)
                 "\t\tLaunches the voice editor, taking a voice name as an optional argument.\n"
                 "\t\tIf [voice] has been specified, the corresponding voice is selected for editing.\n"
                 "\t\tIf [voice] does not correspond to an existing voice, a new one is created by that name.\n"
-                "\t\tIf executed without an argument, a new voice is created by the name \"New Voice\"\n");
+                "\t\tIf no voice is specified, a new voice is created by the name \"New Voice\"\n");
         return FAIL;
+    }
+
+    strtok(input, " ");
+
+    char *name = strtok(NULL, " ");
+
+    VoiceDef voice;
+    
+    if (read_voice(name, &voice) == FAIL)
+        init_voice(&voice, name);
+
+    while (0)
+    { 
+        
     }
 
     return SUCCESS;

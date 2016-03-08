@@ -6,7 +6,7 @@
 #include "cmu.h"
 #include "vocli.h"
 #include "voice_edit.h"
-#include "mystring.h"
+#include "utils.h"
 
 /* Initialize CMU dictionary */
 int cmu_init(const char *filename, CMUDict *dictionary)
@@ -73,7 +73,7 @@ int cmu_init(const char *filename, CMUDict *dictionary)
             }
 
             // Get phoneme ID from symbol
-            uint8_t phonID = get_phonID(ARPAsym);
+            uint8_t phonID = get_phoneme_ID(ARPAsym);
             if (phonID >= NUM_PHONEMES)
             {
                 fprintf(stderr, "Discovered invalid phoneme '%s' in definition of '%s'\n",
