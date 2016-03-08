@@ -13,10 +13,7 @@ int cmu_init(const char *filename, CMUDict *dictionary)
 {
     FILE *fh = fopen(filename, "r");
     if (fh == NULL)
-    {
-        fprintf(stderr, "Unable to open file '%s' for reading\n", filename);
-        return FAIL;
-    }
+        return error(FAIL, "Unable to open file '%s' for reading\n", filename);
 
     char linebuf[CMU_LINE_MAX];
 
@@ -76,11 +73,10 @@ int cmu_init(const char *filename, CMUDict *dictionary)
             uint8_t phonID = get_phoneme_ID(ARPAsym);
             if (phonID >= NUM_PHONEMES)
             {
-                fprintf(stderr, "Discovered invalid phoneme '%s' in definition of '%s'\n",
-                        ARPAsym, dictionary->def[i].word);
                 fclose(fh);
                 free(dictionary->def);
-                return FAIL;
+                return error(FAIL, "Discovered invalid phoneme '%s' in definition of '%s'\n",
+                        ARPAsym, dictionary->def[i].word);
             }
 
             dictionary->def[i].phonIDs[j] = phonID;

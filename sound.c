@@ -13,10 +13,7 @@ int orc_init(CSOUND *csound, const char *filename)
     // Open orchestra file
     FILE *fh = fopen(filename, "r");
     if (fh == NULL)
-    {
-        fprintf(stderr, "Unable to open orchestra file '%s'\n", filename);
-        return FAIL;
-    }
+        return error(FAIL, "Unable to open orchestra file '%s'\n", filename);
 
     // Allocate orchestra buffer
     fseek(fh, 0, SEEK_END);
@@ -29,18 +26,14 @@ int orc_init(CSOUND *csound, const char *filename)
     fclose(fh);
     if (n_read != orc_size)
     {
-        fprintf(stderr, "Invalid number of bytes read from orchestra '%s': %d "
+        return error(FAIL, "Invalid number of bytes read from orchestra '%s': %d "
                 "-- (Expected: %d)\n", filename, n_read, orc_size);
-        return FAIL;
     }
 
     // Compile orchestra
     int result = csoundCompileOrc(csound, orchestra);
     if (result != 0)
-    {
-        fprintf(stderr, "Unable to compile csound orchestra '%s'\n", filename);
-        return FAIL;
-    }
+        return error(FAIL, "Unable to compile csound orchestra '%s'\n", filename);
 
     // Deallocate old orchestra buffer
     free(orchestra);

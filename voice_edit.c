@@ -55,8 +55,7 @@ int read_voice(const char *filename, VoiceDef *voice)
 
     if (strcmp(header, "VDEF") != 0)
     {
-        fprintf(stderr, "Invalid header ('%s') in file '%s'\n", header, filename);
-        return FAIL;
+        return error(FAIL, "Invalid header ('%s') in file '%s'\n", header, filename);
     }
 
     // Get phoneme count
@@ -147,11 +146,7 @@ int read_voice(const char *filename, VoiceDef *voice)
     if (verify_voice(voice) != SUCCESS)
     {
         //init_voice(voice, "");
-        fprintf(stderr, "Failed to verify VoiceDef after successful read!\n");
-        fprintf(stderr, "This shouldn't happen!\n");
-        fprintf(stderr, "Can you email me with a log of this screen? (d.ryan.wood@gmail.com)\n");
-        fprintf(stderr, "Thanks\n");
-        return FAIL;
+        return error(FAIL, "Failed to verify VoiceDef after successful read!\n");
     }
 
     printf("Read voice '%s' from file '%s'\n", voice->name, voice->filename);
@@ -172,16 +167,14 @@ int write_voice(const char *filename, VoiceDef *const voice)
     // Verify voicedef
     if (verify_voice(voice) != SUCCESS)
     {
-        fprintf(stderr, "Unable to verify VoiceDef before writing\n");
-        return FAIL;
+        return error(FAIL, "Unable to verify VoiceDef before writing\n");
     }
 
     // Open target file
     FILE *fh = fopen(filename, "w");
     if (fh == NULL)
     {
-        fprintf(stderr, "Unable to open file '%s' for writing\n", filename);
-        return FAIL;
+        return error(FAIL, "Unable to open file '%s' for writing\n", filename);
     }
 
     // Save filename in voice
@@ -231,9 +224,8 @@ int write_voice(const char *filename, VoiceDef *const voice)
 
     // In case the write fails
 write_fail:
-    fprintf(stderr, "Error writing VoiceDef '%s' to file '%s'\n", voice->name, filename);
     fclose(fh);
-    return FAIL;
+    return error(FAIL, "Error writing VoiceDef '%s' to file '%s'\n", voice->name, filename);
 }
 
 /* Verify a voicedef */
@@ -247,8 +239,7 @@ int verify_voice(const VoiceDef *const voice)
     size_t name_len = strlen(voice->name);
     if (name_len >= SPEAKER_MAX)
     {
-        fprintf(stderr, "Speaker name exceeds maxmimum length: %d (Max: %d)\n", name_len, SPEAKER_MAX);
-        return FAIL;
+        return error(FAIL, "Speaker name exceeds maxmimum length: %d (Max: %d)\n", name_len, SPEAKER_MAX);
     }
 
     // Check the ID of each phoneme

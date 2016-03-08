@@ -49,10 +49,9 @@ int main (int argc, char *argv[])
     int res = orc_init(csound, ORC_PATH);
     if (res != SUCCESS)
     {
-        fprintf(stderr, "FATAL: Unable to initialize Vocli orchestra\n");
         csoundDestroy(csound);
         cmu_destroy(&dictionary);
-        return FAIL;
+        return error(FAIL, "FATAL: Unable to initialize Vocli orchestra\n");
     }
 
     // Special character whitelist
