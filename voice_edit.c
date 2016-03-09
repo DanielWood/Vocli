@@ -6,6 +6,7 @@
 #include "vocli.h"
 #include "arpabet.h"
 #include "voice_edit.h"
+#include "utils.h"
 
 /* Initialize an empty voicedef */
 void init_voice(VoiceDef *voice, const char *name)
@@ -44,7 +45,7 @@ void init_voice(VoiceDef *voice, const char *name)
 int read_voice(const char *filename, VoiceDef *voice)
 {
     // Open target file
-    FILE *fh = fopen(filename, "r");
+    FILE *fh = fopenf("r", "%s/%s", VOICE_DIR, filename);
     if (fh == NULL)
         return error(FAIL, "Unable to open file '%s' for reading", filename);
 
@@ -162,7 +163,7 @@ read_fail:
 }
 
 /* Write a voicedef to disk */
-int write_voice(const char *filename, VoiceDef *const voice)
+int write_voice(const char *filename, VoiceDef *voice)
 {
     // Verify voicedef
     if (verify_voice(voice) != SUCCESS)
@@ -229,7 +230,7 @@ write_fail:
 }
 
 /* Verify a voicedef */
-int verify_voice(const VoiceDef *const voice)
+int verify_voice(const VoiceDef *voice)
 {
     // Pointer checkpp
     if (!voice || !voice->name || !*voice->name)
@@ -275,7 +276,7 @@ void print_phoneme(const PhonDef phoneme)
 }
 
 /* Find phoneme ID with ARPAbet symbol */
-unsigned char get_phoneme_ID(const char *const ARPAsym)
+unsigned char get_phoneme_ID(const char *ARPAsym)
 {
     for (int i = 0; i < NUM_PHONEMES; i++)
     {

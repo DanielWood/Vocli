@@ -27,7 +27,7 @@ int ve_cmd_print(char *input, VoiceDef *voice)
 {
     // Help text
     if (input == NULL)
-        return error(FAIL, "print <Name/ID>\t--\tPrint the phoneme specified by <Name/ID>\n");
+        return error(FAIL, "print <Name/ID>\t--\tPrint the phoneme specified by <Name/ID>");
 
     strtok(input, " ");
 
@@ -60,7 +60,7 @@ int ve_cmd_edit(char *input, VoiceDef *voice)
 {
     // Help text
     if (input == NULL)
-        return error(FAIL, "edit <Name/ID>\t--\tEdit the phoneme specified by <Name/ID>\n");
+        return error(FAIL, "edit <Name/ID>\t--\tEdit the phoneme specified by <Name/ID>");
 
     strtok(input, " ");
     char *IDstr = strtok(NULL, " ");
@@ -137,7 +137,7 @@ int ve_cmd_name(char *input, VoiceDef *voice)
 {
     // Help text
     if (input == NULL)
-        return error(FAIL, "name <new>\t--\tRename the current voice to the value specified by <new>\n");
+        return error(FAIL, "name <new>\t--\tRename the current voice to the value specified by <new>");
 
     // Extract name
     // TODO: Use a different function to manually extract _ALL_ text after the first space, including spaces
@@ -163,7 +163,7 @@ int ve_cmd_save(char *input, VoiceDef *voice)
 {
     // Help text
     if (input == NULL)
-        return error(FAIL, "save [file]\t--\tSave the current voice to the specified or last used filename\n");
+        return error(FAIL, "save [file]\t--\tSave the current voice to the specified or last used filename");
 
     // Get specified filename
     strtok(input, " ");
@@ -193,7 +193,7 @@ int ve_cmd_help(char *input, VoiceDef *voice)
 {
     // Meta-help text
     if (input == NULL)
-        return error(FAIL, "help\t\t--\tDisplay this help text\n");
+        return error(FAIL, "help\t\t--\tDisplay this help text");
 
     (void)(voice);
 
@@ -211,7 +211,7 @@ int ve_cmd_quit(char *input, VoiceDef *voice)
 {
     // Help text
     if (input == NULL)
-        return error(FAIL, "quit\t\t--\tQuit the voice editor and return to Vocli\n");
+        return error(FAIL, "quit\t\t--\tQuit the voice editor and return to Vocli");
 
     // Save voice before exiting
     if (voice->filename[0] != '\0')

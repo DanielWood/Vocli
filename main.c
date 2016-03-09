@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <stdbool.h>
 #include <string.h>
 #include <ctype.h>
 #include <csound.h>
@@ -58,25 +59,37 @@ int main (int argc, char *argv[])
     char ok[] = "'_-";
     size_t oklen = strlen(ok);
 
-    // Interactive console
+    // Input loop
+    bool running = true;
     char input[512];
     printf("\nType '!help' for a list of commands.\n\n");
-    while (1)
+    while (running)
     {
         // Prompt string
         printf("Enter some text> ");
 
         // Read text from input
         fgets(input, 512, stdin);
+        strchomp(input);
 
         // Handle commands
         if (input[0] == '!')
         {
-            putchar('\n');
-            break;
+            if (strncmp(&input[1], "quit", strlen("quit")) == 0)
+            {
+                putchar('\n');
+                running = false;
+            }
+            else
+                for (int i = 0; i < num_cmds; i++)
+                {
+                    const char *name = Commands[i].name;
+                    if (strncmp(&input[1], name, strlen(name)) == 0)
+                        Commands[i].callback(&input[1]);
+                }
 
-            // Skip any further input processing (not reached atm)
-            continue;
+            // Skip further input processing
+            continue; 
         }
 
         // Reformat string to match the dictionary
